@@ -2,24 +2,34 @@
 import lutin.module as module
 import lutin.tools as tools
 
+
+def get_type():
+	return "BINARY"
+
+def get_sub_type():
+	return "TEST"
+
 def get_desc():
-	return "test: Encode wide band"
+	return "Encode wide band"
 
+def get_licence():
+	return "BSD-3"
 
-def create(target):
-	my_module = module.Module(__file__, 'speextestencwb', 'BINARY')
-	# add extra compilation flags :
+def get_compagny_type():
+	return "org"
+
+def get_compagny_name():
+	return "Xiph"
+
+def create(target, module_name):
+	my_module = module.Module(__file__, module_name, get_type())
 	my_module.add_extra_compile_flags()
-	# add the file to compile:
 	my_module.add_src_file([
 		'speex/libspeex/testenc_wb.c'
 		])
 	
-	my_module.compile_version_CC(1989, gnu=True)
-	# name of the dependency
+	my_module.compile_version('c', 1989, gnu=True)
 	my_module.add_module_depend('speex')
-	
-	# add the currrent module at the 
 	return my_module
 
 

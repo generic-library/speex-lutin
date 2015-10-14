@@ -1,14 +1,29 @@
 #!/usr/bin/python
 import lutin.module as module
 import lutin.tools as tools
+import os
+
+def get_type():
+	return "LIBRARY"
 
 def get_desc():
 	return "Algorithm of speex codec"
 
+def get_licence():
+	return "BSD-3"
 
-def create(target):
-	my_module = module.Module(__file__, 'speex', 'LIBRARY')
-	# add extra compilation flags :
+def get_compagny_type():
+	return "org"
+
+def get_compagny_name():
+	return "Xiph"
+
+def get_version():
+	return [1,2,"rc2"]
+
+def create(target, module_name):
+	my_module = module.Module(__file__, module_name, get_type())
+	# add extra compilation flags:
 	my_module.add_extra_compile_flags()
 	# add the file to compile:
 	my_module.add_src_file([
@@ -47,12 +62,20 @@ def create(target):
 		'speex/libspeex/stereo.c',
 		'speex/libspeex/vorbis_psy.c'
 		])
+	my_module.add_header_file([
+		'speex/include/speex/speex_header.h',
+		'speex/include/speex/speex_config_types.h',
+		'speex/include/speex/speex_callbacks.h',
+		'speex/include/speex/speex_types.h',
+		'speex/include/speex/speex.h',
+		'speex/include/speex/speex_stereo.h',
+		'speex/include/speex/speex_bits.h'
+		],
+		destination_path="speex")
 	
-	# name of the dependency
-	#my_module.add_module_depend('speexdsp')
-	
-	my_module.compile_version_CC(1989, gnu=True)
-	my_module.add_export_path(tools.get_current_path(__file__) + "/speex/include")
+
+	my_module.compile_version("c", 1989, gnu=True)
+	my_module.add_path(os.path.join(tools.get_current_path(__file__), "speex/include"))
 	# configure library :
 	
 	# Make use of ARM4 assembly optimizations
