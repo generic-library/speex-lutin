@@ -75,6 +75,7 @@ def create(target, module_name):
 	
 
 	my_module.compile_version("c", 1989, gnu=True)
+	my_module.add_module_depend(['m'])
 	my_module.add_path(os.path.join(tools.get_current_path(__file__), "speex/include"))
 	# configure library :
 	
