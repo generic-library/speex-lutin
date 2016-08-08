@@ -112,6 +112,9 @@ def create(target, module_name):
 	# Use C99 variable-size arrays */
 	my_module.compile_flags('c', "-DVAR_ARRAYS=1")
 	
+	my_module.add_module_depend([
+		    'c'
+		    ])
 	return my_module
 
 
