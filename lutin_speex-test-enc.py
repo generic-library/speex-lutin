@@ -23,12 +23,12 @@ def get_compagny_name():
 
 def create(target, module_name):
 	my_module = module.Module(__file__, module_name, get_type())
-	my_module.add_extra_compile_flags()
+	my_module.add_extra_flags()
 	my_module.add_src_file([
 		'speex/libspeex/testenc.c'
 		])
 	my_module.compile_version('c', 1989, gnu=True)
-	my_module.add_module_depend('speex')
+	my_module.add_depend('speex')
 	return my_module
 
 
