@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import lutin.module as module
+import lutin.debug as debug
 import lutin.tools as tools
 import os
 
@@ -21,8 +21,7 @@ def get_compagny_name():
 def get_version():
 	return [1,2,"rc2"]
 
-def create(target, module_name):
-	my_module = module.Module(__file__, module_name, get_type())
+def configure(target, my_module):
 	# add extra compilation flags:
 	my_module.add_extra_flags()
 	# add the file to compile:
@@ -76,7 +75,7 @@ def create(target, module_name):
 
 	my_module.compile_version("c", 1989, gnu=True)
 	my_module.add_depend(['m'])
-	my_module.add_path(os.path.join(tools.get_current_path(__file__), "speex/include"))
+	my_module.add_path("speex/include")
 	# configure library :
 	
 	# Make use of ARM4 assembly optimizations
@@ -115,6 +114,6 @@ def create(target, module_name):
 	my_module.add_depend([
 		    'c'
 		    ])
-	return my_module
+	return True
 
 

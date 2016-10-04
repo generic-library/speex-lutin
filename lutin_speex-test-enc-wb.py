@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import lutin.module as module
+import lutin.debug as debug
 import lutin.tools as tools
 
 
@@ -21,8 +21,7 @@ def get_compagny_type():
 def get_compagny_name():
 	return "Xiph"
 
-def create(target, module_name):
-	my_module = module.Module(__file__, module_name, get_type())
+def configure(target, my_module):
 	my_module.add_extra_flags()
 	my_module.add_src_file([
 		'speex/libspeex/testenc_wb.c'
@@ -30,6 +29,6 @@ def create(target, module_name):
 	
 	my_module.compile_version('c', 1989, gnu=True)
 	my_module.add_depend('speex')
-	return my_module
+	return True
 
 
